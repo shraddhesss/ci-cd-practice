@@ -31,18 +31,17 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
+	script: |
           # 1. Download the latest code
           if [ ! -d "ci-cd-practice" ]; then
-            git clone https://github.com/shraddhesss/ci-cd-practice.git
-          fi
+          git clone https://github.com/shraddhesss/ci-cd-practice.git
+     	  fi
           cd ci-cd-practice
           git pull origin main
           
-          # 2. Stop and remove the old container if it exists
-          sudo docker stop fastapi-app || true
-          sudo docker rm fastapi-app || true
-          
-          # 3. Build and launch the new container
-          sudo docker build -t my-fastapi-app .
-          sudo docker run -d -p 8000:8000 --name fastapi-app my-fastapi-app
+          # 2. Install Docker Compose on the server if it is missing
+          sudo apt-get install docker-compose -y
+      
+          # 3. Shut down old containers and boot the new multi-container app
+          sudo docker-compose down || true
+          sudo docker-compose up -d --build
