@@ -8,8 +8,10 @@ pipeline {
         }
         stage('Clean Environment') {
             steps {
-                // Wipe out the old containers started by GitHub Actions
-                sh 'docker rm -f $(docker ps -aq) || true'
+                // Safely find all containers and remove them (Jenkins-proof)
+                sh 'docker ps -aq | xargs -r docker rm -f || true'
+                // Clear out any lingering Docker networks
+                sh 'docker network prune -f || true'
             }
         }
         stage('Deploy Application') {
