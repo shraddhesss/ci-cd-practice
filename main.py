@@ -46,7 +46,7 @@ def read_root():
         </head>
         <body>
             <div class="container">
-                <h1>Command Center</h1>
+                <h1>Automated Command Center</h1>
                 <p>Live AWS Infrastructure Monitor</p>
                 <div class="status" id="connection-status">System Status: CONNECTING... 🟡</div>
                 
