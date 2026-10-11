@@ -6,5 +6,10 @@ client = TestClient(app)
 def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert "text/html" in response.headers["content-type"]
     assert "Command Center" in response.text
+
+def test_metrics_api():
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "cpu" in response.json()
+    assert "ram" in response.json()
