@@ -1,0 +1,30 @@
+name: Python Integration & Docker Build
+
+# Trigger the pipeline every time code is pushed to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # GitHub provides this server for free
+
+    steps:
+    - name: 1. Checkout Code
+      uses: actions/checkout@v4
+
+    - name: 2. Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    - name: 3. Install Dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest httpx
+
+    - name: 4. Run API Integration Tests
+      run: pytest test_main.py
+
+    - name: 5. Build Docker Image
+      run: docker build -t my-fastapi-app .
