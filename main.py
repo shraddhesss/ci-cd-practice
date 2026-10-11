@@ -31,7 +31,7 @@ def read_root():
     html_content = """
     <html>
         <head>
-            <title>DevOps Command Center</title>
+            <title>DevOps Automated Command Center</title>
             <style>
                 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
                 .container { background-color: #1e1e1e; padding: 40px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); text-align: center; width: 600px; border: 1px solid #333; }
